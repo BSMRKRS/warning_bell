@@ -1,1 +1,2 @@
 echo $1 > '/home/pi/warning_bell/schedule.txt'
+cat /home/pi/warning_bell/schedule.txt | echo "Schedule set to $1" 

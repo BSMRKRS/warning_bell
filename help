@@ -8,4 +8,8 @@ Here are your options for <<schedule>>
 
 You can check the current schedule with this command: ssh pi@xxx.xxx.xxx.xxx 'cat ~/warning_bell/schedule.txt'
 
+-- Want to make this really easy? --
+Run this command: touch ~/.bash_profile; echo "alias set_schedule_to=\"ssh pi@music-187.local 'sh ~/warning_bell/set_schedule_to \$1'\"" >> ~/.bash_profile; echo "alias check_schedule=\"ssh pi@music-187.local 'cat ~/warning_bell/schedule.txt'\"" >> ~/.bash_profile; source ~/.bash_profile
+Then you can use these commands: 'set_schedule_to late_block' and 'check_schedule'
+
 {{ End Transmission }}
