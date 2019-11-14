@@ -1,0 +1,7 @@
+Thanks for choosing WarningBell!
+
+You can set the time with this command: ssh pi@xxx.xxx.xxx.xxx 'sh ~/warning_bell/set_schedule_to <<schedule>>'
+
+Here are your options for <<schedule>>
+- A schedule name (e.g., regular, block, late_block, event_block, none, auto)
+- A comma-separated list of military times (e.g, 9:00,11:30,14:00)
