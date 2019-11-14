@@ -1,7 +1,14 @@
+### Definition of default schedules
+###################################
+
+regular_schedule = ['8:40','9:30','10:15','11:00','11:45','13:05','13:55','14:40']
+block_schedule = ['9:20','10:45','13:10','14:40']
+event_block_schedule = ['9:05','11:45','13:25','14:40']
+late_block_schedule = ['10:05','11:15','13:25','14:40']
+no_schedule = []
+
 ### Set the Schedule Here
 #########################
-
-custom_schedule = False
 
 ## The schedule is an array of military times as strings
 ## You can set a custom schedule by defining this array. For example custom_schedule = ['8:40','9:30','10:15','11:00','11:45','13:05','13:55','14:40']
@@ -29,24 +36,28 @@ def check_for_warning_time(dt):
     print("Warning")
     play_sound()
 
-def check_schedule(schedule):
+def check_schedule():
+  schedule = determine_schedule()
   for t in schedule:
     dt = datetime.datetime.now()
     dt = dt.replace(hour=int(t.split(':')[0]), minute=int(t.split(':')[1]), second=0)
     check_for_warning_time(dt)
 
-default_schedule = ['8:40','9:30','10:15','11:00','11:45','13:05','13:55','14:40']
-block_schedule = ['9:20','10:45','13:10','14:40']
-event_block_schedule = ['9:05','11:45','13:25','14:40']
-late_block_schedule = ['10:05','11:15','13:25','14:40']
-no_schedule = []
+def default_schedule():
+  return [regular_schedule, regular_schedule, block_schedule, block_schedule, regular_schedule, no_schedule, no_schedule][datetime.datetime.today().weekday()]
 
-if custom_schedule:
-  schedule = custom_schedule
-else:
-  schedule = [default_schedule, default_schedule, block_schedule, block_schedule, default_schedule, no_schedule, no_schedule][datetime.datetime.today().weekday()]
-print(schedule)
+def determine_schedule():
+  f = open('/home/pi/warning_bell/schedule.txt','r')
+  schedule_command = f.read().strip()
+  if ':' in schedule_command:
+    schedule = schedule_command.split(',')
+  elif schedule_command == 'auto':
+    schedule = default_schedule()
+  else:
+    schedule = {'regular': regular_schedule, 'block': block_schedule, 'event_block': event_block_schedule, 'late_block': late_block_schedule, 'none': no_schedule}[schedule_command]
+  f.close()
+  return schedule
 
 while True:
-  check_schedule(schedule)
+  check_schedule()
   time.sleep(10)
