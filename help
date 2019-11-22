@@ -1,15 +1,38 @@
 Thanks for choosing WarningBell!
 
+                      ^
+                    /   \
+                   /     \
+                   |     |
+                   |     |
+                   |     |
+                  ----o----
+
+### Setting the Bell Schedule
+#############################
+
 You can set the time with this command: ssh pi@xxx.xxx.xxx.xxx 'sh ~/warning_bell/set_schedule_to <<schedule>>'
 
 Here are your options for <<schedule>>
 - A schedule name (e.g., regular, block, late_block, event_block, none, auto)
 - A comma-separated list of military times (e.g, 9:00,11:30,14:00)
 
+### Checking the Bell Schedule
+##############################
+
 You can check the current schedule with this command: ssh pi@xxx.xxx.xxx.xxx 'cat ~/warning_bell/schedule.txt'
 
+### Requesting Students
+#######################
+
+You can request students to a specific location in the classroom with this command: ssh pi@xxx.xxx.xxx.xxx 'request <<file_name>>'.
+The available requests are [E1, E2, E3, AllStudents][ToTheSalon, ToYourClassroom]. For example, 'request E2ToYourClassroom'.
+
+### Setting Up Helpful Aliases On Your Local Machine
+####################################################
+
 -- Want to make this really easy? --
-Run this command: touch ~/.bash_profile; echo "alias set_schedule_to=\"ssh pi@music-187.local 'sh ~/warning_bell/set_schedule_to \$1'\"" >> ~/.bash_profile; echo "alias check_schedule=\"ssh pi@music-187.local 'cat ~/warning_bell/schedule.txt'\"" >> ~/.bash_profile; source ~/.bash_profile
-Then you can use these commands: 'set_schedule_to late_block' and 'check_schedule'
+Run this command: touch ~/.bash_profile; echo "alias set_schedule_to=\"ssh pi@music-187.local 'sh ~/warning_bell/set_schedule_to \$1'\"" >> ~/.bash_profile; echo "alias check_schedule=\"ssh pi@music-187.local 'cat ~/warning_bell/schedule.txt'\"" >> ~/.bash_profile;echo "alias request=\"ssh pi@music-187.local 'warning_bell/request \$1'\"" >> ~/.bash_profile; echo "alias warning_bell_help=\"ssh pi@music-187.local 'cat warning_bell/help'\"" >> ~/.bash_profile;source ~/.bash_profile
+Then you can use these commands: 'set_schedule_to late_block', 'check_schedule', 'request E3ToTheSalon', and 'warning_bell_help'
 
 {{ End Transmission }}
