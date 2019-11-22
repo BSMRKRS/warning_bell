@@ -1,7 +1,7 @@
 ### Definition of default schedules
 ###################################
 
-regular_schedule = ['8:40','9:30','10:15','11:00','11:45','13:05','13:55','14:40']
+regular_schedule = ['9:30','10:15','11:00','11:45','13:05','13:55','14:40']
 block_schedule = ['9:20','10:45','13:10','14:40']
 event_block_schedule = ['9:05','11:45','13:25','14:40']
 late_block_schedule = ['10:05','11:15','13:25','14:40']
@@ -21,11 +21,7 @@ no_schedule = []
 import os
 import time
 import datetime
-
-def play_sound():
-  os.system('amixer sset PCM mute')
-  os.system('omxplayer --vol 100 -o local /home/pi/warning_bell/AirHorn-SoundBiblecom-964603082.mp3') 
-  os.system('amixer sset PCM unmute')
+import play_sound
 
 def check_for_warning_time(dt):
   secs = dt.hour * 3600 + dt.minute * 60 + dt.second
@@ -34,7 +30,7 @@ def check_for_warning_time(dt):
   print(diff)
   if(diff < 120 and diff > 80):
     print("Warning")
-    play_sound()
+    play_sound.play()
 
 def check_schedule():
   schedule = determine_schedule()

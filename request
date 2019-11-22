@@ -1,0 +1,1 @@
+python /home/pi/warning_bell/warn.py $1
