@@ -1,1 +1,1 @@
-python /home/pi/warning_bell/warn.py $1
+python /home/pi/warning_bell/play_sound.py $1
