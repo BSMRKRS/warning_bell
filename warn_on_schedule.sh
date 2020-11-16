@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python /home/pi/warning_bell/warn.py
+python3 /home/pi/warning_bell/warn.py
